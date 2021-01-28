@@ -1,3 +1,4 @@
+// Arrays y objetos de cada item
 let radiologia = [
     {
       "HORA": "11:00",
@@ -34,8 +35,44 @@ let radiologia = [
       "RUT": "14989389-K",
       "PREVISION": "FONASA"
     }
-]
-
+];
+radiologia.push(
+  {
+    "HORA": "9:00",
+    "ESPECIALISTA": "RENÉ POBLETE",
+    "PACIENTE": "ANA GELLONA",
+    "RUT": "13123329-7",
+    "PREVISION": "ISAPRE"
+  },
+  {
+    "HORA": "9:30",
+    "ESPECIALISTA": "MARIA SOLAR",
+    "PACIENTE": "RAMIRO ANDRADE",
+    "RUT": "12221451-K",
+    "PREVISION": "FONASA"
+  },
+  {
+    "HORA": "10:00",
+    "ESPECIALISTA": "RAUL LOYOLA",
+    "PACIENTE": "CARMEN ISLA",
+    "RUT": "10112348-3",
+    "PREVISION": "ISAPRE"
+  },
+  {
+    "HORA": "10:30",
+    "ESPECIALISTA": "ANTONIO LARENAS",
+    "PACIENTE": "PABLO LOAYZA",
+    "RUT": "13453234-1",
+    "PREVISION": "ISAPRE"
+  },
+  {
+    "HORA": "12:00",
+    "ESPECIALISTA": "MATIAS ARAVENA",
+    "PACIENTE": "SUSANA POBLETE",
+    "RUT": "14345656-6",
+    "PREVISION": "FONASA"
+  },
+);
 let traumatologia = [
     {
       "HORA": "08:00",
@@ -86,7 +123,9 @@ let traumatologia = [
       "RUT": "11254785-5",
       "PREVISION": "ISAPRE"
     }
-]
+];
+traumatologia.pop();
+traumatologia.shift();
 
 let dental = [
     {
@@ -131,10 +170,60 @@ let dental = [
       "RUT": "14441281-0",
       "PREVISION": "ISAPRE"
     },
-]
+];
+
+// Info ultimo y primer paciente
 // RADIOLOGIA
 document.write(`<h2>Radiología - Cantidad de consultas: ${radiologia.length}</h2> <p>Primera atención: <span>${radiologia[0].RUT} - ${radiologia[0].PREVISION}</span> | Última atención: <span>${radiologia[radiologia.length - 1].RUT} - ${radiologia[radiologia.length - 1].PREVISION}</span></p>`);
 // TRAUMATOLOGIA
 document.write(`<h2>Traumatologia - Cantidad de consultas: ${traumatologia.length}</h2> <p>Primera atención: <span>${traumatologia[0].RUT} - ${traumatologia[0].PREVISION}</span> | Última atención: <span>${traumatologia[traumatologia.length - 1].RUT} - ${traumatologia[traumatologia.length - 1].PREVISION}</span></p>`);
 // DENTAL
-document.write(`<h2>Dental - Cantidad de consultas: ${dental.length} </h2> <p>Primera atención: <span>${dental[0].RUT} - ${dental[0].PREVISION}</span> | Última atención: <span>${dental[dental.length - 1].RUT} - ${dental[dental.length - 1].PREVISION}</span> </p>`);
+// document.write(`<h2>Dental - Cantidad de consultas: ${dental.length} </h2> <p>Primera atención: <span>${dental[0].RUT} - ${dental[0].PREVISION}</span> | Última atención: <span>${dental[dental.length - 1].RUT} - ${dental[dental.length - 1].PREVISION}</span> </p>`);
+document.write("<h2>Dental - Datos de Consultas</h2>")
+
+dental.forEach(function(dataDental){
+  document.write(`<p>${dataDental.HORA} - ${dataDental.ESPECIALISTA} - ${dataDental.PACIENTE} - ${dataDental.RUT} - ${dataDental.PREVISION}</p><br/>`)    
+})
+
+// Nombres de pacientes atendidos
+let pacientes = radiologia.concat(traumatologia, dental);
+//Todos los pacientes
+document.write("<h3>Pacientes atendidos</h3> ")
+pacientes.forEach(function(pacientesTotal) {
+  document.write(`<p class=atendidos >${pacientesTotal.PACIENTE}</p><br>`)
+})
+
+
+// Cambio de previsión
+const cambioIsapre = dental.map(function(elem){
+  if(elem.PREVISION === "FONASA") elem.PREVISION = "ISAPRE"
+  else if(elem.PREVISION === "ISAPRE") elem.PREVISION = "FONASA"
+
+  return elem
+})
+
+document.write("<h3>Dental - Previsiones</h3> ")
+dental.forEach(function(previsiones){
+  document.write(`<p>Paciente: <span>${previsiones.PACIENTE}</span> - Previsión; <span>${previsiones.PREVISION}</span></p><br/>`)    
+})
+
+
+
+/*
+/// Pacientes atendidos al detalle
+//radiologia
+document.write("<h3>Pacientes Radiología atendidos</h3> ")
+radiologia.forEach(function(pacientesRadio) {
+  document.write(`<p class=atendidos >${pacientesRadio.PACIENTE}</p><br>`)
+})
+//traumatologia
+document.write("<h3>Pacientes Traumatología atendidos</h3> ")
+traumatologia.forEach(function(pacientesTrauma) {
+  document.write(`<p class=atendidos >${pacientesTrauma.PACIENTE}</p><br>`)
+})
+//dental
+document.write("<h3>Pacientes Dental atendidos</h3> ")
+dental.forEach(function(pacientesDent) {
+  document.write(`<p class=atendidos >${pacientesDent.PACIENTE}</p><br>`)
+})
+*/
